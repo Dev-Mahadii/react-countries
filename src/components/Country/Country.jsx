@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Country.css';
 
 const Country = ({country}) => {
@@ -11,8 +11,27 @@ const Country = ({country}) => {
     // const currencyCode = country.currencies.currencies;
     // console.log(country.region.region);
 
+    const [visited, setvisited] = useState(false);
+
+    const handleVisited =()=>{
+        // Option 1 [Basic]:
+        // if(visited){
+        //     setvisited(false);
+        // }
+        // else{
+        //     setvisited(true);
+        // }
+
+        // Option 2 [Ternary]:
+        // setvisited(visited? false: true);
+
+        // Option 3 [toggling]:
+        setvisited(!visited);
+        
+    }
+
     return (
-        <div className='card'>            
+        <div className={`card ${visited && 'country-visited'}`}>            
             
             {/* <h3>Name: {country.name.common}</h3> */}
             <img src={country.flags.flags.png} alt={country.flags.flags.alt} />
@@ -20,6 +39,12 @@ const Country = ({country}) => {
             <p>Capital: {country.capital.capital[0]}</p>
             <p>Region: {country.region.region}</p>
             <p>Area: {country.area.area} {country.area.area > 300000 ? "- Big country" : "- Small country"}</p>
+
+            <button onClick={handleVisited}>
+                {
+                    visited? "Visited" : "Not Visited"
+                }
+            </button>
             
             
         </div>
