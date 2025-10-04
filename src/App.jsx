@@ -1,15 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { Suspense } from 'react'
 import './App.css'
+import Countries from './components/Countries/Countries'
+
+/**Step 1 */
+const countriesPromise = fetch('https://openapi.programming-hero.com/api/all')
+.then(res=> res.json())
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
       
-      <h1>Vite + React</h1>
+      <Suspense fallback={<p>Countries Are Loading...</p>}>
+        <Countries countriesPromise={countriesPromise}></Countries>
+      </Suspense>
       
     </>
   )
